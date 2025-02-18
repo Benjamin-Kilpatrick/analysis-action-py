@@ -27,6 +27,7 @@ jobs:
         git config --local user.name "github-actions"
         git fetch
         git checkout analysis
+        git pull origin
         mv ../my_text_out.txt ./my_text_out.txt
         git add --all
         if [-z "$(git status --porcelain)"]; then
