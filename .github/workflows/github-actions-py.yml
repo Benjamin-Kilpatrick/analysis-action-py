@@ -25,12 +25,12 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "github-actions"
+        git checkout analysis
+        mv ../my_text_out.txt ./my_text_out.txt
         git add --all
         if [-z "$(git status --porcelain)"]; then
            echo "::set-output name=push::false"
         else
-           git checkout analysis
-           mv ../my_text_out.txt ./my_text_out.txt
            git commit -m "Add changes" -a
            echo "::set-output name=push::true"
         fi
