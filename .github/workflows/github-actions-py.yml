@@ -17,7 +17,7 @@ jobs:
         ls
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        python update.py
+        python update.py > ../my_text_out.txt
         ls
 
     - name: Commit files
@@ -29,13 +29,15 @@ jobs:
         if [-z "$(git status --porcelain)"]; then
            echo "::set-output name=push::false"
         else
-           #git commit -m "Add changes" -a
+           git checkout analysis
+           mv ../my_text_out.txt ./my_text_out.txt
+           git commit -m "Add changes" -a
            echo "::set-output name=push::true"
         fi
       shell: bash
     - name: Push changes
       if: steps.commit.outputs.push == 'true'
-      uses: ad-m/github-push-action@master
+      uses: ad-m/github-push-action@analysis
       with:
          github_token: ${{ secrets.GITHUB_TOKEN }}
 
