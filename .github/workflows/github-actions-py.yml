@@ -27,7 +27,7 @@ jobs:
         git config --local user.name "github-actions"
         git fetch
         git branch -a
-        git checkout analysis
+        git switch -c analysis remotes/origin/analysis
         git pull origin
         mv ../my_text_out.txt ./my_text_out.txt
         git add --all
