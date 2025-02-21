@@ -17,7 +17,8 @@ jobs:
         ls
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        python update.py > ../my_text_out.txt
+        ANALYSIS_FILE_NAME = ${{ github.head_ref }}.${{ github.sha }}-analysis.txt
+        python update.py > ../$ANALYSIS_FILE_NAME
         ls
 
     - name: Commit files
@@ -29,7 +30,7 @@ jobs:
         git branch -a
         git switch -c analysis remotes/origin/analysis
         git pull
-        mv ../my_text_out.txt ./my_text_out.txt
+        mv ../$ANALYSIS_FILE_NAME ./ANALYSIS_FILE_NAME
         git add --all
         if [-z "$(git status --porcelain)"]; then
            echo "::set-output name=push::false"
