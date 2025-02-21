@@ -7,6 +7,7 @@ print("looking in", root_dir)
 
 files = list(Path(root_dir).glob('**/*.py'))
 for path in files:
-    print(path)
-    # do ur stuff for each file here
+    if not (".github" in path and "workflows" in path):
+        print(path)
+        # do ur stuff for each file here
 
