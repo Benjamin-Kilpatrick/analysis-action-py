@@ -19,8 +19,8 @@ jobs:
       run: |
         ls
         python -m pip install --upgrade pip
-        pip install -r .github/workflows/requirements.txt 
-        python update.py > ../$ANALYSIS_FILE_NAME
+        pip install -r .github/workflows/github-actions-py/requirements.txt 
+        python .github/workflows/github-actions-py/analysis.py > ../$ANALYSIS_FILE_NAME
         ls
 
     - name: Commit files
