@@ -6,8 +6,11 @@ jobs:
   Python-Analysis-Actions:
     runs-on: ubuntu-latest
 
-    steps:
+    steps: 
     - uses: actions/checkout@v2
+    - name: Set analysis file name
+      run:
+        echo "ANALYSIS_FILE_NAME=${{ github.head_ref }}.${{ github.sha }}-analysis.txt" >> $GITHUB_ENV
     - name: Set up Python
       uses: actions/setup-python@v1
       with:
@@ -17,7 +20,6 @@ jobs:
         ls
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        ANALYSIS_FILE_NAME=${{ github.head_ref }}.${{ github.sha }}-analysis.txt
         python update.py > ../$ANALYSIS_FILE_NAME
         ls
 
