@@ -30,7 +30,7 @@ jobs:
         git branch -a
         git switch -c analysis remotes/origin/analysis
         git pull
-        mv ../$ANALYSIS_FILE_NAME ./ANALYSIS_FILE_NAME
+        mv ../$ANALYSIS_FILE_NAME ./$ANALYSIS_FILE_NAME
         git add --all
         if [-z "$(git status --porcelain)"]; then
            echo "::set-output name=push::false"
